@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-09-29T03:00:27 IST" name="Default suite" finished-at="2025-09-29T03:00:43 IST" duration-ms="16531">
+    <groups>
+    </groups>
+    <test started-at="2025-09-29T03:00:27 IST" name="Default test" finished-at="2025-09-29T03:00:43 IST" duration-ms="16531">
+      <class name="com.redbus.tests.RedbusApplicationAutomate">
+        <test-method is-config="true" signature="navigateToRedbus()[pri:0, instance:com.redbus.tests.RedbusApplicationAutomate@67d48005]" started-at="2025-09-29T03:00:27 IST" name="navigateToRedbus" finished-at="2025-09-29T03:00:29 IST" duration-ms="2816" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateToRedbus -->
+        <test-method signature="searchBuses()[pri:0, instance:com.redbus.tests.RedbusApplicationAutomate@67d48005]" started-at="2025-09-29T03:00:29 IST" name="searchBuses" finished-at="2025-09-29T03:00:43 IST" duration-ms="13653" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchBuses -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.redbus.tests.RedbusApplicationAutomate@67d48005]" started-at="2025-09-29T03:00:43 IST" name="tearDown" finished-at="2025-09-29T03:00:43 IST" duration-ms="142" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.redbus.tests.RedbusApplicationAutomate -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
