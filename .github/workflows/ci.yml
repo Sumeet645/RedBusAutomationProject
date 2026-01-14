@@ -20,7 +20,10 @@ jobs:
           distribution: temurin
           java-version: "17"
           cache: maven
-
+          
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+        
       - name: Run Smoke Tests
         run: mvn clean test -Dcucumber.filter.tags="@SearchBuses"
 
