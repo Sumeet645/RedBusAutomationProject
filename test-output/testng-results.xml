@@ -2,24 +2,46 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-29T03:00:27 IST" name="Default suite" finished-at="2025-09-29T03:00:43 IST" duration-ms="16531">
+  <suite started-at="2025-11-24T02:00:50 IST" name="BDD Test Suite" finished-at="2025-11-24T02:01:29 IST" duration-ms="38815">
     <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@485e36bc]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
     </groups>
-    <test started-at="2025-09-29T03:00:27 IST" name="Default test" finished-at="2025-09-29T03:00:43 IST" duration-ms="16531">
-      <class name="com.redbus.tests.RedbusApplicationAutomate">
-        <test-method is-config="true" signature="navigateToRedbus()[pri:0, instance:com.redbus.tests.RedbusApplicationAutomate@67d48005]" started-at="2025-09-29T03:00:27 IST" name="navigateToRedbus" finished-at="2025-09-29T03:00:29 IST" duration-ms="2816" status="PASS">
+    <test started-at="2025-11-24T02:00:50 IST" name="Cucumber Tests" finished-at="2025-11-24T02:01:29 IST" duration-ms="38815">
+      <class name="runners.TestRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runners.TestRunner@485e36bc]" started-at="2025-11-24T02:00:50 IST" name="setUpClass" finished-at="2025-11-24T02:00:51 IST" duration-ms="789" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@7a78d380]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- navigateToRedbus -->
-        <test-method signature="searchBuses()[pri:0, instance:com.redbus.tests.RedbusApplicationAutomate@67d48005]" started-at="2025-09-29T03:00:29 IST" name="searchBuses" finished-at="2025-09-29T03:00:43 IST" duration-ms="13653" status="PASS">
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runners.TestRunner@485e36bc]" started-at="2025-11-24T02:00:51 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-11-24T02:01:28 IST" duration-ms="37268" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify user can complete bus booking"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Verify the E2E Search Buses flow of Redbus"]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchBuses -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.redbus.tests.RedbusApplicationAutomate@67d48005]" started-at="2025-09-29T03:00:43 IST" name="tearDown" finished-at="2025-09-29T03:00:43 IST" duration-ms="142" status="PASS">
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runners.TestRunner@485e36bc]" started-at="2025-11-24T02:01:28 IST" name="tearDownClass" finished-at="2025-11-24T02:01:29 IST" duration-ms="690" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.redbus.tests.RedbusApplicationAutomate -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- runners.TestRunner -->
+    </test> <!-- Cucumber Tests -->
+  </suite> <!-- BDD Test Suite -->
 </testng-results>

@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.redbus.tests.RedbusApplicationAutomate">
+      <class name="runners.TestRunner">
         <methods>
-          <include name="tearDown"/>
-          <include name="navigateToRedbus"/>
-          <include name="searchBuses"/>
+          <include name="setUpClass"/>
+          <include name="runScenario" invocation-numbers="1"/>
+          <include name="tearDownClass"/>
         </methods>
-      </class> <!-- com.redbus.tests.RedbusApplicationAutomate -->
+      </class> <!-- runners.TestRunner -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -1,0 +1,10 @@
+<suite name="BDD Test Suite" >
+<listeners>
+	<listener class-name="Listeners.FrameworkListener" />>
+</listeners>
+	<test name="Cucumber Tests">
+		<classes>
+			<class name="runners.TestRunner"/>
+		</classes>
+	</test>
+</suite>

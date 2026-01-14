@@ -1,0 +1,10 @@
+target/
+test-output/
+logs/
+Reports/
+ExtentReports/
+Screenshots/
+.idea/
+.vscode/
+*.log
+

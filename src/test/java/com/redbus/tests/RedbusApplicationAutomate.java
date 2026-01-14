@@ -49,7 +49,7 @@ public class RedbusApplicationAutomate {
 		wait.until(ExpectedConditions.elementToBeClickable(from));
 		from.click();
 		
-		wait.until(ExpectedConditions.elementToBeClickable(from));
+		//wait.until(ExpectedConditions.elementToBeClickable(from));
 		
 		By inputFromLocator=By.xpath("//input[@id='srcDest']");
 		WebElement inputFrom=wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(inputFromLocator)));
@@ -58,10 +58,10 @@ public class RedbusApplicationAutomate {
 		//Select the from result from auto-suggestive dropdown
 		Thread.sleep(2000);
 		List<WebElement> fromSearchResults=driver.findElements(
-									By.xpath("//div[@class='searchCategory___993266']/div[contains(@class,'listItem___9a15c0')]/div/div/div"));
+									By.xpath("//div[contains(@class,'listHeader')]"));
 		
 		wait.until(ExpectedConditions.elementToBeClickable(fromSearchResults.get(0)));
-		System.out.println(fromSearchResults.get(0));
+		System.out.println(fromSearchResults.size());
 		
 		for(WebElement results : fromSearchResults)
 		{
@@ -82,7 +82,7 @@ public class RedbusApplicationAutomate {
 		Thread.sleep(2000);
 		
 		List<WebElement> toSearchResults=driver.findElements(
-									By.xpath("//div[@class='searchCategory___993266']/div[contains(@class,'listItem___9a15c0')]/div/div/div[@class='listHeader___90a8b7']"));
+									By.xpath("//div[contains(@class,'listHeader')]"));
 		wait.until(ExpectedConditions.elementToBeClickable(toSearchResults.get(0)));
 		
 		for(WebElement results : toSearchResults)
@@ -97,24 +97,25 @@ public class RedbusApplicationAutomate {
 		driver.findElement(By.xpath("//h2[text()='Offers for you']")).click();
 		// DatePicker
 		int i = 1;
-		By dateLocator=By.xpath("//span[@class='doj___e69938']");
+		By dateLocator=By.xpath("//span[text()='Date of Journey']/following-sibling::span");
 		WebElement date=wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(dateLocator)));
 		date.click();
 		
 		while (i > 0) {
+			//Thread.sleep(2000);
 			By monthYearLocator=By.xpath("//p[contains(@class,'monthYear')]");
 			WebElement monthYearText = wait.until(ExpectedConditions.visibilityOf(driver.findElement(monthYearLocator)));
 			By nextLocator = By.xpath("//i[contains(@aria-label,'Next')]");
 			WebElement next = wait.until(ExpectedConditions.visibilityOf(driver.findElement(nextLocator)));
 			
-			if (!(monthYearText.getText().contains("October"))) {
+			if (!(monthYearText.getText().contains("May"))) {
 				next.click();
 				i++;
 			}
 			else
 			{
 				System.out.print(monthYearText.getText());
-				WebElement day=driver.findElement(By.xpath("//span[text()='24']"));
+				WebElement day=driver.findElement(By.xpath("//span[text()='18']"));
 				day.click();
 				break;
 				
@@ -133,7 +134,7 @@ public class RedbusApplicationAutomate {
 		By subtitleLocator=By.xpath("//span[contains(@class,'subtitle')]");
 		WebElement subtitleLocatorText=wait.until(ExpectedConditions.visibilityOf(driver.findElement(subtitleLocator)));
 		
-		By searchListLocator=By.xpath("//div[contains(@class,'ind-search')]/ul/li");
+		By searchListLocator=By.xpath("//div[contains(@class,'travelsName')]");
 		
 		JavascriptExecutor js=((JavascriptExecutor)driver);
 		
@@ -152,12 +153,29 @@ public class RedbusApplicationAutomate {
 		}
 		
 		//By endOfListLocator=By.xpath("")
+		List<WebElement> searchList=wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(searchListLocator));
+		
+		for(WebElement busName : searchList)
+		{
+			if(busName.getText().equalsIgnoreCase("Sri Tulasi Tours and Travels"))
+			{
+				
+				int index=searchList.indexOf(busName)+1;
+				js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})", busName);
+				System.out.println("Index is" + index);
+				Thread.sleep(5000);
+				By viewSeatsLocator= By.xpath("(//button[contains(@class,'viewSeatsBtn')])["+ index +"]");
+				WebElement viewSeatsBtn=wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(viewSeatsLocator)));
+				viewSeatsBtn.click();
+				break;
+			}
+		}
 
 	}
 
-	@AfterSuite
-	public static void tearDown() {
-		driver.quit();
-	}
+//	@AfterSuite
+//	public static void tearDown() {
+//		driver.quit();
+//	}
 
 }
