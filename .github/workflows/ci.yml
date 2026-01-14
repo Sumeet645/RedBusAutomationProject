@@ -1,4 +1,4 @@
-name:CI-Cucumber Smoke
+name: CI-Cucumber Smoke
 
 on:
   pull_request:
