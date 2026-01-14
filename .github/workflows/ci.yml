@@ -1,0 +1,36 @@
+name:CI-Cucumber Smoke
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+
+        with:
+          distribution: temurin
+          java-version: "11"
+          cache: maven
+
+       - name: Run Smoke Tests
+         run: mvn clean test -Dcucumber.filter.tags="@SearchBuses"
+
+       - name: Upload Reports
+         if: always()
+         uses: actions/upload-artifacts@v4
+         with:
+           name: test-reports
+           path: |
+             target
+             test-output 
+

@@ -14,7 +14,7 @@ import io.cucumber.testng.CucumberOptions;
 						        "json:target/cucumber.json",
 						        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 							},
-							tags="@SearchBuses",
+							tags="${cucumber.filter.tags}",
 						monochrome=true,
 						dryRun=false)
 public class TestRunner extends AbstractTestNGCucumberTests {
