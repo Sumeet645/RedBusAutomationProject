@@ -16,6 +16,7 @@ public class UtilityMethods {
 		if(sc==null) return;
 		
 		WebDriver driver=DriverManager.getDriver();
+		if(driver == null) return;
 				
 		
 		byte[] screenshot=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);

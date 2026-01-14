@@ -33,11 +33,19 @@ public class Hooks {
 	@After
 	public void tearDown(Scenario scenario)
 	{
+		
+		WebDriver d=DriverManager.getDriver();
+		
+		if(d!=null)
+		{
+			System.out.println(d);
+		}
 		try {
-			if(scenario.isFailed())
+			if(scenario.isFailed() )
 			{
 				UtilityMethods.takeScreenshot("Scenario Failed .." + scenario.getName());
 			}
+			
 			else
 			{
 				Log.info("Sceanrio Passed" + scenario.getName());
@@ -45,7 +53,7 @@ public class Hooks {
 		}
 		
 		finally {
-			//driverManager.quitDriver();
+			driverManager.quitDriver();
 			ScenarioContext.clear();
 		}
 	}
