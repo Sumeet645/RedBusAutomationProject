@@ -20,16 +20,16 @@ public class DriverManager {
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 
-        // CI runners (GitHub Actions) need headless + flags
-            options.addArguments("--headless=new");
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--disable-gpu");
-			options.addArguments("--remote-allow-origins=*");
-			options.addArguments("--window-size=1920,1080");
-        
-        
-		driver.set(new ChromeDriver(options));
+		// Only in CI (GitHub Actions)
+		if ("true".equalsIgnoreCase(System.getenv("CI"))) {
+		    options.addArguments("--headless=new");
+		    options.addArguments("--no-sandbox");
+		    options.addArguments("--disable-dev-shm-usage");
+		   
+		}
+
+				driver.set(new ChromeDriver(options));
+
 	}
 	
 	public static WebDriver getDriver()
