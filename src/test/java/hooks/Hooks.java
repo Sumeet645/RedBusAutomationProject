@@ -43,7 +43,7 @@ public class Hooks {
 		try {
 			if(scenario.isFailed() )
 			{
-				UtilityMethods.takeScreenshot("Scenario Failed .." + scenario.getName());
+				UtilityMethods.takeScreenshot(d,"Scenario Failed .." + scenario.getName());
 			}
 			
 			else

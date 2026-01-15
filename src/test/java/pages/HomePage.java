@@ -67,7 +67,7 @@ public class HomePage {
 			{
 				boarding.click();
 				Log.info("Boarding Point " + boardingPoint + " Selected");
-				UtilityMethods.takeScreenshot("Dropping Point " + boardingPoint + " Selected");
+				UtilityMethods.takeScreenshot(driver,"Dropping Point " + boardingPoint + " Selected");
 				break;
 			}
 		}
@@ -92,7 +92,7 @@ public class HomePage {
 			{
 				drop.click();
 				Log.info("Dropping Point " + droppingPoint + " Selected");
-				UtilityMethods.takeScreenshot("Dropping Point " + droppingPoint + " Selected");
+				UtilityMethods.takeScreenshot(driver,"Dropping Point " + droppingPoint + " Selected");
 				break;
 			}
 		}
@@ -122,7 +122,7 @@ public class HomePage {
 				WebElement day=driver.findElement(By.xpath("//span[text()='1']"));
 				day.click();
 				Log.info("Specified Date Selected");
-				UtilityMethods.takeScreenshot("Specified Date Selected");
+				UtilityMethods.takeScreenshot(driver,"Specified Date Selected");
 				break;
 			}
 			
@@ -134,7 +134,7 @@ public class HomePage {
 		wait.until(ExpectedConditions.elementToBeClickable(locators.searchBusLocator));
 		locators.searchBusLocator.click();
 		Log.info("Clicked on Search Bus button");
-		UtilityMethods.takeScreenshot("Clicked on Search Bus button");
+		UtilityMethods.takeScreenshot(driver,"Clicked on Search Bus button");
 		System.out.println("Clicked on Search Bus button");
 	}
 	

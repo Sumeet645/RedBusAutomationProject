@@ -42,7 +42,7 @@ public class BusResultsPage {
 		{
 			wait.until(ExpectedConditions.visibilityOfAllElements(locators.searchListLocator));
 			Log.info("Bus Lists");
-			UtilityMethods.takeScreenshot("Bus Lists");
+			UtilityMethods.takeScreenshot(driver,"Bus Lists");
 			
 			if(!(locators.endOfTheList.isEmpty()))
 			{
@@ -74,7 +74,7 @@ public class BusResultsPage {
 				Thread.sleep(2000);
 				viewSeatsBtn.click();
 				Log.info("Total Seats");
-				UtilityMethods.takeScreenshot("Total Seats");
+				UtilityMethods.takeScreenshot(driver,"Total Seats");
 				busIsPresent++;
 				break;
 			}
@@ -112,7 +112,7 @@ public class BusResultsPage {
 			{
 				seatList.click();
 				Log.info("Seat "+ seatNumber + "selected");
-				UtilityMethods.takeScreenshot("Seat "+ seatNumber + "selected");
+				UtilityMethods.takeScreenshot(driver,"Seat "+ seatNumber + "selected");
 				System.out.println("Seat "+ seatNumber + "selected");
 				break;
 			}
@@ -135,7 +135,7 @@ public class BusResultsPage {
 			{
 				boardingPoints.click();
 				Log.info("Boarding Point "+ boardingPoints.getText() +"selected");
-				UtilityMethods.takeScreenshot("Boarding Point "+ boardingPoints.getText() +"selected");
+				UtilityMethods.takeScreenshot(driver,"Boarding Point "+ boardingPoints.getText() +"selected");
 				System.out.println("Boarding Point "+ boardingPoints.getText() + "selected");
 				break;
 			}
@@ -149,7 +149,7 @@ public class BusResultsPage {
 			{
 				droppingPoints.click();
 				Log.info("Dropping Point "+ droppingPoints.getText() +"selected");
-				UtilityMethods.takeScreenshot("Dropping Point "+ droppingPoints.getText() +"selected");
+				UtilityMethods.takeScreenshot(driver,"Dropping Point "+ droppingPoints.getText() +"selected");
 				System.out.println("Dropping Point "+ droppingPoints.getText() + "selected");
 				break;
 			}
@@ -172,13 +172,13 @@ public class BusResultsPage {
 			{
 				selectGender.click();
 				Log.info("Gender" + selectGender.getText() + "Selected");
-				UtilityMethods.takeScreenshot("Gender "+ selectGender.getText() +" Selected");
+				UtilityMethods.takeScreenshot(driver,"Gender "+ selectGender.getText() +" Selected");
 			}
 			else
 			{
 				System.out.println("Gender is already been selected");
 				Log.info("Gender" + selectGender.getText() + " already Selected");
-				UtilityMethods.takeScreenshot("Gender "+ selectGender.getText() +" already Selected");
+				UtilityMethods.takeScreenshot(driver,"Gender "+ selectGender.getText() +" already Selected");
 			}
 		}
 		

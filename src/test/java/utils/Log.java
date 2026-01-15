@@ -43,7 +43,7 @@ public class Log {
 	public static void infoWithScreenShot(String message)
 	{
 		log.info(message);
-		UtilityMethods.takeScreenshot(message.replace(" ", "_"));
+		UtilityMethods.takeScreenshot(DriverManager.getDriver(),message.replace(" ", "_"));
 	}
 
 
