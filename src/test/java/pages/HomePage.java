@@ -37,7 +37,7 @@ public class HomePage {
 	public void getUrl(String url)
 	{
 		driver.get(url);
-		driver.manage().window().maximize();
+		
 	
 	}
 	
@@ -92,6 +92,7 @@ public class HomePage {
 			if(drop.getText().contains(droppingPoint))
 			{
 				System.out.println(drop.getText());
+				wait.until(ExpectedConditions.elementToBeClickable(drop));
 				drop.click();
 				Log.info("Dropping Point " + droppingPoint + " Selected");
 				UtilityMethods.takeScreenshot(driver,"Dropping Point " + droppingPoint + " Selected");

@@ -63,7 +63,15 @@ public class BusResultsPage {
 			{
 				System.out.println(buses.getText());
 				int index=locators.searchListLocator.indexOf(buses)+1;
-				int newIndex=index-1;
+				int newIndex=0;
+				if(index>1)
+				{
+					newIndex=index-1;
+				}
+				else
+				{
+					newIndex=index;
+				}
 				//js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})", buses);
 				System.out.println("Index is" + index);
 				Thread.sleep(5000);
