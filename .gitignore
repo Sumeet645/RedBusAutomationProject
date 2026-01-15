@@ -1,5 +1,7 @@
 target/
 test-output/
+Screenshots/
+ExtentReports/
 .idea/
 .vscode/
 *.log
