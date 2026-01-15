@@ -65,6 +65,8 @@ public class HomePage {
 		{
 			if(boarding.getText().contains(boardingPoint))
 			{
+				System.out.println(boarding.getText());
+				wait.until(ExpectedConditions.elementToBeClickable(boarding));
 				boarding.click();
 				Log.info("Boarding Point " + boardingPoint + " Selected");
 				UtilityMethods.takeScreenshot(driver,"Dropping Point " + boardingPoint + " Selected");
@@ -87,9 +89,9 @@ public class HomePage {
 		System.out.println(locators.toSearchResults.size());
 		for(WebElement drop : locators.toSearchResults )
 		{
-			System.out.println(drop.getText());
 			if(drop.getText().contains(droppingPoint))
 			{
+				System.out.println(drop.getText());
 				drop.click();
 				Log.info("Dropping Point " + droppingPoint + " Selected");
 				UtilityMethods.takeScreenshot(driver,"Dropping Point " + droppingPoint + " Selected");
