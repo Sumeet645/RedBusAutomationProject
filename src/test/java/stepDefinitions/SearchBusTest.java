@@ -46,7 +46,7 @@ public class SearchBusTest {
 	public void user_enters_in_the_to_input_field() throws Exception {
 
 		homepage.inputToField("Bhubaneswar");
-		homepage.selectDroppingPoint("Bermunda Bus Stand, Bhubaneswar");
+		homepage.selectDroppingPoint("Baramunda Bus Terminus, Bhubaneswar");
 		log.info("Destination city selected...");
 	}
 
@@ -89,7 +89,7 @@ public class SearchBusTest {
 		
 		
 		homepage.inputToField("Bhubaneswar");
-		homepage.selectDroppingPoint("Bermunda Bus Stand, Bhubaneswar");
+		homepage.selectDroppingPoint("Baramunda Bus Terminus, Bhubaneswar");
 		log.info("Destination city selected...");
 		
 		homepage.selectTravelDate("February");
