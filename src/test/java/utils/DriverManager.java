@@ -19,25 +19,26 @@ public class DriverManager {
 		log.info("Intialising Driver");
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--window-size=1920,1080");
+		System.out.println("CI env = " + System.getenv("CI"));
 
 		// Only in CI (GitHub Actions)
 		if ("true".equalsIgnoreCase(System.getenv("CI"))) {
 		    options.addArguments("--headless=new");
 		    options.addArguments("--no-sandbox");
 		    options.addArguments("--disable-dev-shm-usage");
-		    options.addArguments("--window-size=1920,1080");
 		    options.addArguments("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36");
-
 
 		}
 
 				driver.set(new ChromeDriver(options));
+				
 
 	}
 	
 	public static WebDriver getDriver()
 	{
-		
+	
 		return driver.get();
 	}
 	

@@ -37,7 +37,7 @@ public class HomePage {
 	public void getUrl(String url)
 	{
 		driver.get(url);
-		driver.manage().window().maximize();
+		
 	
 	}
 	
