@@ -1,6 +1,5 @@
 package pages;
 
-
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -17,190 +16,154 @@ import utils.DriverManager;
 import utils.Log;
 import utils.UtilityMethods;
 
-public class BusResultsPage {
-	
-	private final WebDriver driver;
-	private final RedBus locators;
-	WebDriverWait wait;
-	JavascriptExecutor js;
-	
-	public BusResultsPage(DriverManager driverManager,RedBus locators)
-	{
-		this.driver=driverManager.getDriver();
-		this.locators=locators;
-		PageFactory.initElements(driver,locators);
-		wait=new WebDriverWait(driver,Duration.ofSeconds(30));
-		js=(JavascriptExecutor)driver;
-		
-	}
-	
-	public void verifyListOfBuses()
-	{
+public class BusResultsPage extends BasePage {
+
+	public void verifyListOfBuses() {
 		wait.until(ExpectedConditions.visibilityOfAllElements(locators.searchListLocator));
-		System.out.println("Total Buses avaialable for the route on the expected date " + locators.searchListLocator.size());	
-		while(true)
-		{
+		System.out.println(
+				"Total Buses avaialable for the route on the expected date " + locators.searchListLocator.size());
+		while (true) {
 			wait.until(ExpectedConditions.visibilityOfAllElements(locators.searchListLocator));
 			Log.info("Bus Lists");
-			UtilityMethods.takeScreenshot(driver,"Bus Lists");
-			
-			if(!(locators.endOfTheList.isEmpty()))
-			{
+			UtilityMethods.takeScreenshot(driver, "Bus Lists");
+
+			if (!(locators.endOfTheList.isEmpty())) {
 				break;
 			}
-			
-			js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})",locators.searchListLocator.get(locators.searchListLocator.size()-3));
+
+			js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})",
+					locators.searchListLocator.get(locators.searchListLocator.size() - 3));
 		}
 	}
-	
-	public void selectBus(String busName) throws Exception
-	{
-		int busIsPresent=0;
+
+	public void selectBus(String busName) throws Exception {
+		int busIsPresent = 0;
 		wait.until(ExpectedConditions.visibilityOfAllElements(locators.searchListLocator));
-		for(WebElement buses : locators.searchListLocator)
-		{
-			if(buses.getText().equalsIgnoreCase(busName))
-			{
+		for (WebElement buses : locators.searchListLocator) {
+			if (buses.getText().equalsIgnoreCase(busName)) {
 				System.out.println(buses.getText());
-				int index=locators.searchListLocator.indexOf(buses)+1;
-				int newIndex=0;
-				if(index>1)
-				{
-					newIndex=index-1;
+				int index = locators.searchListLocator.indexOf(buses) + 1;
+				int newIndex = 0;
+				if (index > 1) {
+					newIndex = index - 1;
+				} else {
+					newIndex = index;
 				}
-				else
-				{
-					newIndex=index;
-				}
-				//js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})", buses);
+				// js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})", buses);
 				System.out.println("Index is" + index);
 				Thread.sleep(5000);
-				By viewSeatsLocator= By.xpath("(//button[contains(@class,'viewSeatsBtn')])["+ index +"]");
-				By newViewSeatsLocator= By.xpath("(//button[contains(@class,'viewSeatsBtn')])["+ newIndex +"]");
-				WebElement viewSeatsBtn=wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(viewSeatsLocator)));
-				js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})", driver.findElement(newViewSeatsLocator));
+				By viewSeatsLocator = By.xpath("(//button[contains(@class,'viewSeatsBtn')])[" + index + "]");
+				By newViewSeatsLocator = By.xpath("(//button[contains(@class,'viewSeatsBtn')])[" + newIndex + "]");
+				WebElement viewSeatsBtn = wait
+						.until(ExpectedConditions.elementToBeClickable(driver.findElement(viewSeatsLocator)));
+				js.executeScript("arguments[0].scrollIntoView({behavior:'smooth'})",
+						driver.findElement(newViewSeatsLocator));
 				Thread.sleep(2000);
 				viewSeatsBtn.click();
 				Log.info("Total Seats");
-				UtilityMethods.takeScreenshot(driver,"Total Seats");
+				UtilityMethods.takeScreenshot(driver, "Total Seats");
 				busIsPresent++;
 				break;
 			}
 		}
-		
-		if(busIsPresent==0)
-		{
+
+		if (busIsPresent == 0) {
 			Log.info("Buses doesn't run on particular date");
 			Assert.fail("No bus named" + " " + busName + " " + "present");
 		}
 	}
-	
-	public void selectSeat(String busName,String desiredSeatNumber) throws Exception
-	{
-		String seatNumber="";
+
+	public void selectSeat(String busName, String desiredSeatNumber) throws Exception {
+		String seatNumber = "";
 		wait.until(ExpectedConditions.visibilityOf(locators.busName));
 		Assert.assertEquals(locators.busName.getText(), busName);
-		
-		for(WebElement seatList : locators.sleeperSeatsList)
-		{
-			String seatID=seatList.getAttribute("id");
-					
-			if(seatID.contains("W") || seatID.contains("M"))
-			{
-				seatNumber=seatID.substring(1,2);
+
+		for (WebElement seatList : locators.sleeperSeatsList) {
+			String seatID = seatList.getAttribute("id");
+
+			if (seatID.contains("W") || seatID.contains("M")) {
+				seatNumber = seatID.substring(1, 2);
+				System.out.println("Seat Number is " + seatNumber);
+			} else {
+				seatNumber = seatID.substring(1);
 				System.out.println("Seat Number is " + seatNumber);
 			}
-			else
-			{
-				seatNumber=seatID.substring(1);
-				System.out.println("Seat Number is " + seatNumber);
-			}
-			
-			if(seatNumber.equalsIgnoreCase(desiredSeatNumber) && Integer.parseInt(desiredSeatNumber)<=locators.totalSleeperSeats.size())
-			{
+
+			if (seatNumber.equalsIgnoreCase(desiredSeatNumber)
+					&& Integer.parseInt(desiredSeatNumber) <= locators.totalSleeperSeats.size()) {
 				seatList.click();
-				Log.info("Seat "+ seatNumber + "selected");
-				UtilityMethods.takeScreenshot(driver,"Seat "+ seatNumber + "selected");
-				System.out.println("Seat "+ seatNumber + "selected");
+				Log.info("Seat " + seatNumber + "selected");
+				UtilityMethods.takeScreenshot(driver, "Seat " + seatNumber + "selected");
+				System.out.println("Seat " + seatNumber + "selected");
 				break;
 			}
-			
+
 		}
-		
+
 		wait.until(ExpectedConditions.visibilityOf(locators.SelectBrdngAndDrpngPtsBtn));
 		Thread.sleep(1000);
 		locators.SelectBrdngAndDrpngPtsBtn.click();
-		
+
 	}
-	
-	public void selectBoardingAndDroppingPoint(String boardingPoint,String droppingPoint) throws InterruptedException
-	{
+
+	public void selectBoardingAndDroppingPoint(String boardingPoint, String droppingPoint) throws InterruptedException {
 		Thread.sleep(1000);
-		
-		for(WebElement boardingPoints : locators.selectBoardingPoint)
-		{
-			if(boardingPoints.getText().contains(boardingPoint))
-			{
+
+		for (WebElement boardingPoints : locators.selectBoardingPoint) {
+			if (boardingPoints.getText().contains(boardingPoint)) {
 				boardingPoints.click();
-				Log.info("Boarding Point "+ boardingPoints.getText() +"selected");
-				UtilityMethods.takeScreenshot(driver,"Boarding Point "+ boardingPoints.getText() +"selected");
-				System.out.println("Boarding Point "+ boardingPoints.getText() + "selected");
+				Log.info("Boarding Point " + boardingPoints.getText() + "selected");
+				UtilityMethods.takeScreenshot(driver, "Boarding Point " + boardingPoints.getText() + "selected");
+				System.out.println("Boarding Point " + boardingPoints.getText() + "selected");
 				break;
 			}
 		}
-		
+
 		wait.until(ExpectedConditions.visibilityOfAllElements(locators.selectDroppingPoint));
-		
-		for(WebElement droppingPoints : locators.selectBoardingPoint)
-		{
-			if(droppingPoints.getText().contains(droppingPoint))
-			{
+
+		for (WebElement droppingPoints : locators.selectBoardingPoint) {
+			if (droppingPoints.getText().contains(droppingPoint)) {
 				droppingPoints.click();
-				Log.info("Dropping Point "+ droppingPoints.getText() +"selected");
-				UtilityMethods.takeScreenshot(driver,"Dropping Point "+ droppingPoints.getText() +"selected");
-				System.out.println("Dropping Point "+ droppingPoints.getText() + "selected");
+				Log.info("Dropping Point " + droppingPoints.getText() + "selected");
+				UtilityMethods.takeScreenshot(driver, "Dropping Point " + droppingPoints.getText() + "selected");
+				System.out.println("Dropping Point " + droppingPoints.getText() + "selected");
 				break;
 			}
 		}
-		
+
 		wait.until(ExpectedConditions.visibilityOf(locators.fillPassengerDetailsBtn));
 		locators.fillPassengerDetailsBtn.click();
-		
+
 	}
-	
-	public void enterPassengerDetails(String name, String age, String Gender)
-	{
+
+	public void enterPassengerDetails(String name, String age, String Gender) {
 		wait.until(ExpectedConditions.visibilityOf(locators.enterName));
 		locators.enterName.sendKeys(name);
 		locators.enterAge.sendKeys(age);
-		
-		for(WebElement selectGender : locators.selectGender)
-		{
-			if(selectGender.getAttribute("aria-Label").equalsIgnoreCase(Gender) && selectGender.getAttribute("aria-selected").equalsIgnoreCase("false"))
-			{
+
+		for (WebElement selectGender : locators.selectGender) {
+			if (selectGender.getAttribute("aria-Label").equalsIgnoreCase(Gender)
+					&& selectGender.getAttribute("aria-selected").equalsIgnoreCase("false")) {
 				selectGender.click();
 				Log.info("Gender" + selectGender.getText() + "Selected");
-				UtilityMethods.takeScreenshot(driver,"Gender "+ selectGender.getText() +" Selected");
-			}
-			else
-			{
+				UtilityMethods.takeScreenshot(driver, "Gender " + selectGender.getText() + " Selected");
+			} else {
 				System.out.println("Gender is already been selected");
 				Log.info("Gender" + selectGender.getText() + " already Selected");
-				UtilityMethods.takeScreenshot(driver,"Gender "+ selectGender.getText() +" already Selected");
+				UtilityMethods.takeScreenshot(driver, "Gender " + selectGender.getText() + " already Selected");
 			}
 		}
-		
-		js.executeScript("arguments[0].scrollIntoView({beahvior:'smooth'})",locators.selectFreeCancellation);
-		locators.selectFreeCancellation.click();
+
+		//js.executeScript("arguments[0].scrollIntoView({beahvior:'smooth'})", locators.selectFreeCancellation);
+		//locators.selectFreeCancellation.click();
 		wait.until(ExpectedConditions.visibilityOf(locators.selectRedbusAssuranceOption));
 		locators.selectRedbusAssuranceOption.click();
 	}
-	
-	public void makePayment()
-	{
+
+	public void makePayment() {
 		wait.until(ExpectedConditions.visibilityOf(locators.continueBookingBtn));
 		locators.continueBookingBtn.click();
-		
+
 	}
 
 }
